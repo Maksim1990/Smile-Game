@@ -51,9 +51,10 @@ function  generateFaces(){
        
         event.stopPropagation();
         numberOfFaces += 5;
-        countDownDate = 11;
-         clearInterval(x);
-        generateFaces();
+      countDownDate = 11;
+
+generateFaces();
+clearInterval(x);
          level+=1;
          
 }
@@ -72,9 +73,13 @@ theBody.onclick = function gameOver() {
    while (theRightSide.hasChildNodes()) {
     theRightSide.removeChild(theRightSide.lastChild);
                             }
-        generateFaces();
+     countDownDate = 11;
+
+generateFaces();
+clearInterval(x);
    }else{
-       alert('Thank you for playing this game & see you soon!')
+        alert('Thank you for playing this game & see you soon!');
+	 clearInterval(x);
    }
 } 
 
@@ -83,21 +88,28 @@ var x=setInterval(function() {
    current=timeMin();
    if(current > -1){
      document.getElementById("demo").innerHTML = current + "s ";
+	 
  }
    else {
-
-        document.getElementById("demo").innerHTML = "EXPIRED";
-        alert("Game Over!");
+        alert("Time out!");
 alert("Your Score is  "+level);
 var restart=confirm('Start game again?');
 if(restart){
+	  numberOfFaces = 0;
+     while (theLeftSide.hasChildNodes()) {
+    theLeftSide.removeChild(theLeftSide.lastChild);
+                            }
+   while (theRightSide.hasChildNodes()) {
+    theRightSide.removeChild(theRightSide.lastChild);
+   }
 countDownDate = 11;
 
 generateFaces();
 clearInterval(x);
 }else{
-    clearInterval(x);
-     alert('Thank you for playing this game & see you soon!')
+    
+     alert('Thank you for playing this game & see you soon!');
+	 clearInterval(x);
 }
     }
 }, 1000); 
@@ -117,8 +129,8 @@ img {position:absolute;}
 
 <body id="theBody" onLoad="generateFaces()">
 <h2>Matching Game</h2>
-<p>Click on the extra smiling face on the left.</p>
-  <p id="demo"></p>
+<span>Click on the extra smiling face on the left.</span><br/>
+  TIME LEFT:<span id="demo" style="color:red;font-size:20px;"></span>
   <div id="leftSide"></div>
 
     <div id="rightSide"></div>
